@@ -39,3 +39,27 @@ const lib = WebAssembly.instantiate(new Uint8Array(factorial_wasm), { env: { con
       }
    }
 );
+
+const assemblyscript_wasm = fs.readFileSync('./build/fib.wasm');
+const lib_asm = WebAssembly.instantiate(new Uint8Array(assemblyscript_wasm), {
+    env: {
+      __memory_base: 0,
+      __table_base: 0,
+      memory: new WebAssembly.Memory({initial: 1}),
+      abort: () => {}
+    },
+    imports: {
+      imported_func: function(arg) {
+        console.log(arg);
+      },
+      wasi_unstable: () => {},
+      fib: () => {},
+    },
+    fib: {
+      "console.log": (val) => console.log("log:", val)
+    }
+  }).
+   then(res => {
+    console.log("res.instance.exports.fib(12) = " + res.instance.exports.fib(12));
+   }
+);

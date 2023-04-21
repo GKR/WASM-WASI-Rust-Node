@@ -5,15 +5,17 @@
     "description": "Learning WASI and WASM",
     "main": "main.js",
     "scripts": {
-      "start": "node --experimental-wasi-unstable-preview1 src/run-wasm.js",
-      "build": "cargo build --target wasm32-wasi --release && mkdir -p ./build && node node_modules/wabt/bin/wat2wasm src/factorial.wat -o ./build/factorial.wasm",
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node --experimental-wasi-unstable-preview1 src/run-wasm.js",
+        "build-assemblyscript": "node node_modules/assemblyscript/bin/asc.js src/fib.ts --outFile build/fib.wasm --optimize",
+        "build-rust": "cargo build --target wasm32-wasi --release",
+        "build-webassembly": "node node_modules/wabt/bin/wat2wasm src/factorial.wat -o ./build/factorial.wasm",
+        "build": "mkdir -p ./build && npm run build-webassembly && npm run build-assemblyscript && npm run build-rust",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-      "assemblyscript": "^0.27.2",
-      "wabt": "^1.0.32"
+        "assemblyscript": "^0.27.2",
+        "wabt": "^1.0.32"
     },
     "author": "",
     "license": "ISC"
-  }
-  
+}
