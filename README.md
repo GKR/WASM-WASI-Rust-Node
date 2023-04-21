@@ -12,7 +12,10 @@
 ## Build and run
  * `$ cargo build --target wasm32-wasi --release`
  * `$ npm i`
- * `$ node --experimental-wasi-unstable-preview1 run-wasm.js`
+ * `$ node --experimental-wasi-unstable-preview1 src/run-wasm.js`
+
+## Getting data in and out of WASI modules
+https://petermalmgren.com/serverside-wasm-data/
 
 ## Links
 Augmenting Node.js with WebAssembly
@@ -23,3 +26,6 @@ https://wasmbyexample.dev/examples/wasi-hello-world/wasi-hello-world.rust.en-us.
 
 WebAssembly System Interface (WASI)
 https://nodejs.dev/en/api/v18/wasi/
+
+Wasmtime - A fast and secure runtime for WebAssembly
+https://wasmtime.dev/
